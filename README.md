@@ -14,7 +14,7 @@ pygtk installed in the system python
 
 Debian / Ubuntu
 
-``` $ sudo apt-get install python-pygtk```
+``` $ sudo apt-get install python-gtk2```
 
 SuSE
 
