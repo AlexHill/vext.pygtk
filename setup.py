@@ -20,12 +20,14 @@ from setuptools import setup
 from setuptools.command.install import install
 from setuptools.command.install_lib import install_lib
 
+import os.path
 import sys
 
 vext_files = glob("*.vext")
 
 def _post_install(self):
-    cmd = ["vext", "-e", "-i" + (" -i".join(vext_files))]
+    vext_path = os.path.join(os.path.dirname(sys.executable), "vext")
+    cmd = [vext_path, "-e", "-i" + (" -i".join(vext_files))]
     call(cmd)
 
 class Install(install):
@@ -39,7 +41,7 @@ class Install(install):
         if sys.prefix == '/usr':
             print("Not installing PTH file to real prefix")
             return
-        call(["pip", "install", vext_version])
+        call([sys.executable, "-mpip", "install", vext_version])
         self.do_egg_install()
         self.execute(_post_install, [self], msg="Install vext files:")
 
